@@ -24,7 +24,7 @@ public class Register {
         this.username = username;
         this.email = email;
         this.password = password;
-        this.cpassword = password;
+        this.cpassword = cpassword;
         this.alertPassword = alertPassword;
     }
 
@@ -49,7 +49,7 @@ public class Register {
             username.setText(String.format("%s","Please enter username"));
         }else if(username.getText().toString().length() < 8){
             username.setText(String.format("%s","Username must be at least 8 characters"));
-        }else{
+        }else if(username.getText().toString().length() >= 8){
             if(usersDataSource.ifUsernameIsAvailable(username.getText().toString()))
                 user.setUname(username.getText().toString());
             else
