@@ -34,16 +34,16 @@ public class OnTouchActivity extends AppCompatActivity {
                         initY = motionEvent.getY();
                         x1Edit.setText(String.format("%.2f",initX));
                         y1Edit.setText(String.format("%.2f",initY));
-                        return true;
+                        break;
                     case MotionEvent.ACTION_UP:
                         finalX = motionEvent.getX();
                         finalY = motionEvent.getY();
                         x2Edit.setText(String.format("%.2f",finalX));
                         y2Edit.setText(String.format("%.2f",finalY));
-                        return true;
-                }
 
-                getQuadrant(imgView);
+                        getQuadrant(imgView);
+                        break;
+                }
                 return true;
             }
         });
@@ -64,8 +64,6 @@ public class OnTouchActivity extends AppCompatActivity {
 
         double midX = imgview.getWidth()/2, midY = imgview.getHeight()/2;
 
-        Log.d("Mid x : Mid y",""+midX+":"+midY);
-        Log.d("    x :     y",""+finalX+":"+finalY);
         if (finalX > midX && finalY < midY) {
             quadEdit.setText(String.format("%s", "QUADRANT 1"));
         }else if (finalX < midX && finalY < midY) {
