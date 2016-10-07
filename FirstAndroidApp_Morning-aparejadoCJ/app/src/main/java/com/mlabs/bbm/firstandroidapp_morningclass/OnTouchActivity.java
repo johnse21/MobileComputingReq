@@ -3,6 +3,7 @@ package com.mlabs.bbm.firstandroidapp_morningclass;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -10,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class OnTouchActivity extends AppCompatActivity {
-
+    private double initX=0, initY=0, finalX=0, finalY=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +24,6 @@ public class OnTouchActivity extends AppCompatActivity {
         final EditText y2Edit = (EditText)findViewById(R.id.y2Edit);
 
         imgView.setOnTouchListener(new View.OnTouchListener() {
-            float initX = 0, initY = 0, finalX = 0, finalY = 0;
 
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -40,37 +40,39 @@ public class OnTouchActivity extends AppCompatActivity {
                         finalY = motionEvent.getY();
                         x2Edit.setText(String.format("%.2f",finalX));
                         y2Edit.setText(String.format("%.2f",finalY));
-                        getQuadrant(imgView, initX, initY, finalX, finalY);
                         return true;
                 }
-                return false;
+
+                getQuadrant(imgView);
+                return true;
             }
         });
 
 
     }
 
-    public void getQuadrant(ImageView imgview, double x1, double y1, double x2, double y2){
+    public void getQuadrant(ImageView imgview){
         final EditText diffEdit = (EditText)findViewById(R.id.differenceEditText);
         final EditText quadEdit = (EditText)findViewById(R.id.quadrantEditText);
         String diff = "";
 
-        diff = (x1 > x2) ? "X's: "+ String.format("%.2f",(x1 - x2)) : "X's: "+ String.format("%.2f",(x2 - x1));
+        diff = (initX > finalX) ? "X's: "+ String.format("%.2f",(initX - finalX)) : "X's: "+ String.format("%.2f",(finalX - initX));
 
-        diff += (y1 > y2) ? " Y's: "+ String.format("%.2f",(y1 - y2)) : " Y's: "+ String.format("%.2f",(y2 - y1));
+        diff += (initY > finalY) ? " Y's: "+ String.format("%.2f",(initY - finalY)) : " Y's: "+ String.format("%.2f",(finalY - initY));
 
         diffEdit.setText(String.format("%s", diff));
 
         double midX = imgview.getWidth()/2, midY = imgview.getHeight()/2;
 
-
-        if (x2 > midX && y2 < midY) {
+        Log.d("Mid x : Mid y",""+midX+":"+midY);
+        Log.d("    x :     y",""+finalX+":"+finalY);
+        if (finalX > midX && finalY < midY) {
             quadEdit.setText(String.format("%s", "QUADRANT 1"));
-        }else if (x2 < midX && y2 < midY) {
+        }else if (finalX < midX && finalY < midY) {
             quadEdit.setText(String.format("%s", "QUADRANT 2"));
-        }else if (x2 < midX && y2 > midY) {
+        }else if (finalX < midX && finalY > midY) {
             quadEdit.setText(String.format("%s", "QUADRANT 3"));
-        }else if (x2 > midX && y2 > midY) {
+        }else if (finalX > midX && finalY > midY) {
             quadEdit.setText(String.format("%s", "QUADRANT 4"));
         }
 
