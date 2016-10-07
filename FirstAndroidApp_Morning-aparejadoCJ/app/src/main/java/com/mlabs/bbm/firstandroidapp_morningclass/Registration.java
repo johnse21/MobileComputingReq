@@ -24,12 +24,6 @@ public class Registration extends AppCompatActivity {
         lnameEdit = (EditText)findViewById(R.id.lnameEditTxt);
         unameEdit = (EditText)findViewById(R.id.unameEditTxt);
         emailEdit = (EditText)findViewById(R.id.emailEditTxt);
-
-        fnameEdit.setOnTouchListener(new ETextListener());
-        lnameEdit.setOnTouchListener(new ETextListener());
-        unameEdit.setOnTouchListener(new ETextListener());
-        emailEdit.setOnTouchListener(new ETextListener());
-
         alertPassword = (TextView)findViewById(R.id.alertPassword);
         passwordEdit = (EditText)findViewById(R.id.passwordEditTxt);
         cpasswordEdit = (EditText)findViewById(R.id.cpasswordEditTxt);
@@ -47,30 +41,5 @@ public class Registration extends AppCompatActivity {
                 }
             }
         });
-    }
-    private class ETextListener implements View.OnTouchListener{
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            if (v.equals(fnameEdit)) {
-                if(fnameEdit.getText().toString().equals("Please enter first name"))
-                    fnameEdit.setText("");
-            }
-
-            if (v.equals(lnameEdit)) {
-                if(lnameEdit.getText().toString().equals("Please enter last name"))
-                    lnameEdit.setText("");
-            }
-            if (v.equals(unameEdit)) {
-                if(unameEdit.getText().toString().equals("Please enter username") || unameEdit.getText().toString().equals("Username not available") || unameEdit.getText().toString().equals("Username must be at least 8 characters"))
-                    unameEdit.setText("");
-            }
-            if (v.equals(emailEdit)) {
-                if(emailEdit.getText().toString().equals("Please enter email address") || emailEdit.getText().toString().equals("Invalid email format"))
-                    emailEdit.setText("");
-            }
-
-
-            return false;
-        }
     }
 }

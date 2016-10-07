@@ -7,6 +7,8 @@ import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Creepy Pasta on 9/27/2016.
@@ -34,43 +36,53 @@ public class Register {
         usersDataSource.open();
 
         if(fname.getText().toString().equals("")){
-            fname.setText(String.format("%s","Please enter first name"));
+            fname.setText("");
+            fname.setHint(String.format("%s","Please enter first name"));
         }else{
             user.setFname(fname.getText().toString());
         }
 
         if(lname.getText().toString().equals("")){
-            lname.setText(String.format("%s","Please enter last name"));
+            lname.setText("");
+            lname.setHint(String.format("%s","Please enter last name"));
         }else{
             user.setLname(lname.getText().toString());
         }
 
         if(username.getText().toString().equals("")){
-            username.setText(String.format("%s","Please enter username"));
+            username.setText("");
+            username.setHint(String.format("%s","Please enter username"));
         }else if(username.getText().toString().length() < 8){
-            username.setText(String.format("%s","Username must be at least 8 characters"));
+            username.setText("");
+            username.setHint(String.format("%s","Username must be at least 8 characters"));
         }else if(username.getText().toString().length() >= 8){
             if(usersDataSource.ifUsernameIsAvailable(username.getText().toString()))
                 user.setUname(username.getText().toString());
-            else
-                username.setText(String.format("%s","Username not available"));
+            else {
+                username.setText("");
+                username.setHint(String.format("%s", "Username not available"));
+            }
         }
 
         if(email.getText().toString().equals("")){
-            email.setText(String.format("%s","Please enter email address"));
+            email.setText("");
+            email.setHint(String.format("%s","Please enter email address"));
         }else{
             if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
-                email.setText(String.format("%s", "Invalid email format"));
+                email.setText("");
+                email.setHint(String.format("%s", "Invalid email format"));
             }else{
                 if(usersDataSource.ifEmailIsAvailable(email.getText().toString()))
                     user.setEmail(email.getText().toString());
-                else
-                    email.setText(String.format("%s","Try another email"));
+                else {
+                    email.setText("");
+                    email.setHint(String.format("%s", "Try another email"));
+                }
             }
 
         }
 
-        if(password.getText().toString().equals("") && password.getText().toString().length() < 8){
+        if(password.getText().toString().equals("") || password.getText().toString().length() < 8){
             alertPassword.setText(String.format("%s","Password must be more than 7 characters"));
         }else{
             if(cpassword.getText().toString().equals("") || !password.getText().toString().equals(cpassword.getText().toString())){
