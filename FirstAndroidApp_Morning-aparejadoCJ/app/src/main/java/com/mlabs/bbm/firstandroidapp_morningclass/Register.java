@@ -36,44 +36,38 @@ public class Register {
         usersDataSource.open();
 
         if(fname.getText().toString().equals("")){
-            fname.setText("");
-            fname.setHint(String.format("%s","Please enter first name"));
+            fname.setError(String.format("%s","Please enter first name"));
         }else{
             user.setFname(fname.getText().toString());
         }
 
         if(lname.getText().toString().equals("")){
             lname.setText("");
-            lname.setHint(String.format("%s","Please enter last name"));
+            lname.setError(String.format("%s","Please enter last name"));
         }else{
             user.setLname(lname.getText().toString());
         }
 
         if(username.getText().toString().equals("")){
-            username.setText("");
-            username.setHint(String.format("%s","Please enter username"));
+            username.setError(String.format("%s","Please enter username"));
         }else {
             if(usersDataSource.ifUsernameIsAvailable(username.getText().toString()))
                 user.setUname(username.getText().toString());
             else {
-                username.setText("");
-                username.setHint(String.format("%s", "Username not available"));
+                username.setError(String.format("%s", "Username not available"));
             }
         }
 
         if(email.getText().toString().equals("")){
-            email.setText("");
-            email.setHint(String.format("%s","Please enter email address"));
+            email.setError(String.format("%s","Please enter email address"));
         }else{
             if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email.getText().toString()).matches()) {
-                email.setText("");
-                email.setHint(String.format("%s", "Invalid email format"));
+                email.setError(String.format("%s", "Invalid email format"));
             }else{
                 if(usersDataSource.ifEmailIsAvailable(email.getText().toString()))
                     user.setEmail(email.getText().toString());
                 else {
-                    email.setText("");
-                    email.setHint(String.format("%s", "Try another email"));
+                    email.setError(String.format("%s", "Try another email"));
                 }
             }
 
