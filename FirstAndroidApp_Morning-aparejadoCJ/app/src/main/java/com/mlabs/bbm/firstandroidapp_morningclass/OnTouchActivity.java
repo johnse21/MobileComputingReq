@@ -54,6 +54,8 @@ public class OnTouchActivity extends AppCompatActivity {
     public void getQuadrant(ImageView imgview){
         final EditText diffEdit = (EditText)findViewById(R.id.differenceEditText);
         final EditText quadEdit = (EditText)findViewById(R.id.quadrantEditText);
+        final EditText direction = (EditText)findViewById(R.id.directionEdit);
+
         String diff = "";
 
         diff = (initX > finalX) ? "X's: "+ String.format("%.2f",(initX - finalX)) : "X's: "+ String.format("%.2f",(finalX - initX));
@@ -62,11 +64,32 @@ public class OnTouchActivity extends AppCompatActivity {
 
         diffEdit.setText(String.format("%s", diff));
 
+        String swipe = "";
+        if(initX < finalX){
+            swipe += "swipe right";
+        }else if(initX > finalX){
+            swipe += "swipe left";
+        }else{
+            swipe += "";
+        }
+
+        if(initY < finalY){
+            swipe += ",swipe down";
+        }else if(initY > finalY){
+            swipe += ",swipe up";
+        }else{
+            swipe += "no swipe";
+        }
+
+        direction.setText(String.format("%s", swipe.toUpperCase()));
+
         double midX = imgview.getWidth()/2, midY = imgview.getHeight()/2;
 
-        if (finalX > midX && finalY < midY) {
+        if (finalX > midX && finalY < midY)
+        {
             quadEdit.setText(String.format("%s", "QUADRANT 1"));
-        }else if (finalX < midX && finalY < midY) {
+        }
+        else if (finalX < midX && finalY < midY) {
             quadEdit.setText(String.format("%s", "QUADRANT 2"));
         }else if (finalX < midX && finalY > midY) {
             quadEdit.setText(String.format("%s", "QUADRANT 3"));
