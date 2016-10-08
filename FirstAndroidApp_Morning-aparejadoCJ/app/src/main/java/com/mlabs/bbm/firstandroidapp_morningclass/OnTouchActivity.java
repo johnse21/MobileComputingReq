@@ -66,19 +66,15 @@ public class OnTouchActivity extends AppCompatActivity {
 
         String swipe = "";
         if(initX < finalX){
-            swipe += "swipe right";
+            swipe += "swipe right ";
         }else if(initX > finalX){
-            swipe += "swipe left";
-        }else{
-            swipe += "";
+            swipe += "swipe left ";
         }
 
         if(initY < finalY){
-            swipe += ",swipe down";
+            swipe += "swipe down";
         }else if(initY > finalY){
-            swipe += ",swipe up";
-        }else{
-            swipe += "no swipe";
+            swipe += "swipe up";
         }
 
         direction.setText(String.format("%s", swipe.toUpperCase()));
