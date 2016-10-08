@@ -95,6 +95,7 @@ public class LoginScreen extends Activity{
             if(v.equals(signUpLink)){
                 Intent intent = new Intent(LoginScreen.this, Registration.class);
                 startActivity(intent);
+                finish();
             }
 
             return false;

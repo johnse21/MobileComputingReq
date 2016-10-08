@@ -52,10 +52,7 @@ public class Register {
         if(username.getText().toString().equals("")){
             username.setText("");
             username.setHint(String.format("%s","Please enter username"));
-        }else if(username.getText().toString().length() < 8){
-            username.setText("");
-            username.setHint(String.format("%s","Username must be at least 8 characters"));
-        }else if(username.getText().toString().length() >= 8){
+        }else {
             if(usersDataSource.ifUsernameIsAvailable(username.getText().toString()))
                 user.setUname(username.getText().toString());
             else {
